@@ -1,2 +1,2 @@
-# master thesis Jorid Holmen
+# Master's thesis Jorid Holmen
 This repository contains the code used in my master's thesis. 
