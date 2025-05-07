@@ -3,9 +3,9 @@ from utilities import *
 from utilities_tracking import * 
 
 rumex_data = 'datasets/BoxDroneRumexStratify.yaml'
-dir_save = 'runs/train'
+dir_save = 'runs_B/train'
 result_save = 'exp'
-clear_directories('runs')
+clear_directories('runs_B')
 
 model = YOLO("weights/best.pt") # weights from model A
 
@@ -24,18 +24,18 @@ results = model.train(data=rumex_data,
 
 
 # Define variables for validating 
-dir_save = 'runs/train'  # Path to the directory where the training results are saved
+dir_save = 'runs_B/train'  # Path to the directory where the training results are saved
 result_save = 'exp' 
 area = '20210806_hegnstrup'     # Name of the area
 model = YOLO(f"{dir_save}/{result_save}/weights/best.pt")   # Load the model
 
 # Get results
-val_results = model.val(data=rumex_data, split='test', project='runs/detect', name='val', exist_ok=True)
-output_dir = 'final_res'
+val_results = model.val(data=rumex_data, split='test', project='runs_B/detect', name='val', exist_ok=True)
+output_dir = 'final_res_B'
 clear_directories(output_dir)
 create_table(val_results, f'{output_dir}/detection_metrics.png', f'{output_dir}/detection_metrics.csv')
 train_plots(f'{dir_save}/{result_save}', f'{output_dir}/train_results.png')
-gather_curve_plots('runs/detect/val', output_dir)
+gather_curve_plots('runs_B/detect/val', output_dir)
 
 
 # Tracking 
@@ -55,7 +55,7 @@ for seq in sequences:
 
     mh, acc = motMetricsAccumulator(gtSource, tSource)
 
-    summary = compute_metrics(mh, acc, ['mota', 'motp', 'idf1'], 'final_res/tracking_metrics')
+    summary = compute_metrics(mh, acc, ['mota', 'motp', 'idf1'], 'final_res_B/tracking_metrics')
     metric_res.append(summary)
 
     id_name_frame_dict = get_unique_tracking_ids_with_frames(track_results)
