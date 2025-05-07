@@ -1,2 +1,2 @@
-# master-thesis-Jorid-Homen
-This repository contains the code used in my master thesis. 
+# master thesis Jorid Holmen
+This repository contains the code used in my master's thesis. 
